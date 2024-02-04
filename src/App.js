@@ -33,13 +33,20 @@ function App() {
   }
 
   function rollDice() {
-    setDice(prevDice=> {
-      return prevDice.map((die)=>{
-        return die.isHeld ? 
-        die :
-         {...die, value: Math.ceil(Math.random()*6)}
+    if (!tenzies) {
+      setDice(prevDice=> {
+        return prevDice.map((die)=>{
+          return die.isHeld ? 
+          die :
+           {...die, value: Math.ceil(Math.random()*6)}
+        })
       })
-    })
+    } else{
+      setDice(allNewDice)
+      setTenzies(false)
+      console.log("New Game")
+    }
+   
   }
 
   function holdDice(id) {
@@ -60,12 +67,6 @@ function App() {
       if (isAllHeld && allSameValue) {
         setTenzies(true)
         console.log("You won")
-      }
-
-      if (tenzies) {
-        setDice(allNewDice)
-        setTenzies(false)
-        console.log("New Game")
       }
 
 
